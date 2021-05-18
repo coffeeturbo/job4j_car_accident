@@ -6,12 +6,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Repository
 @Getter
 public class AccidentMem {
 
-    private HashMap<Integer, Accident> accidents = new HashMap<>(
+    private final HashMap<Integer, Accident> accidents = new HashMap<>(
             Map.of(
                     1, Accident.builder()
                             .id(1)
@@ -33,4 +34,11 @@ public class AccidentMem {
                             .build()
             )
     );
+
+    public Accident create(Accident accident) {
+        Random rm = new Random();
+        accident.setId(Math.abs(rm.nextInt()));
+        accidents.put(accident.getId(), accident);
+        return accident;
+    }
 }

@@ -12,6 +12,11 @@
 </head>
 <body>
 <div class="container ">
+
+    <ul>
+        <li><a href="<c:url value='/create'/>">Добавить инцидент</a></li>
+    </ul>
+
     <table class="table table-striped">
         <thead>
         <tr>
