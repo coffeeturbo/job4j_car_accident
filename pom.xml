@@ -12,6 +12,7 @@
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
         <spring.version>5.2.7.RELEASE</spring.version>
+        <loombok-plugin-version>1.18.20</loombok-plugin-version>
     </properties>
 
     <dependencies>
@@ -56,6 +57,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${loombok-plugin-version}</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
