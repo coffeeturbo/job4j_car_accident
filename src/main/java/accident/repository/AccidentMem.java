@@ -4,6 +4,7 @@ import accident.model.Accident;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMem {
@@ -36,8 +37,8 @@ public class AccidentMem {
     }
 
     public Accident create(Accident accident) {
-        Random rm = new Random();
-        accident.setId(Math.abs(rm.nextInt()));
+        AtomicInteger ai = new AtomicInteger(accidents.size());
+        accident.setId(ai.get());
         accidents.put(accident.getId(), accident);
         return accident;
     }
