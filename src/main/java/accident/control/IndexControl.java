@@ -12,7 +12,7 @@ public class IndexControl {
     @GetMapping("/")
     public String index(Model model) {
         AccidentMem repository = new AccidentMem();
-        model.addAttribute("accidents", repository.getAccidents().values());
+        model.addAttribute("accidents", repository.getAccidents());
         return "index";
     }
 }

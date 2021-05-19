@@ -1,15 +1,11 @@
 package accident.repository;
 
 import accident.model.Accident;
-import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Repository
-@Getter
 public class AccidentMem {
 
     private final HashMap<Integer, Accident> accidents = new HashMap<>(
@@ -34,6 +30,10 @@ public class AccidentMem {
                             .build()
             )
     );
+
+    public Collection<Accident> getAccidents() {
+        return accidents.values();
+    }
 
     public Accident create(Accident accident) {
         Random rm = new Random();
