@@ -36,10 +36,23 @@ public class AccidentMem {
         return accidents.values();
     }
 
+    public Accident save(Accident accident) {
+        return accident.getId()==null ? create(accident) : update(accident);
+    }
+
+    public Accident update(Accident accident) {
+        accidents.put(accident.getId(), accident);
+        return accident;
+    }
+
     public Accident create(Accident accident) {
         AtomicInteger ai = new AtomicInteger(accidents.size() + 1);
         accident.setId(ai.get());
         accidents.put(accident.getId(), accident);
         return accident;
+    }
+
+    public Accident findById(Integer id) {
+        return accidents.get(id);
     }
 }
