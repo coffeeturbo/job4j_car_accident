@@ -37,7 +37,7 @@ public class AccidentMem {
     }
 
     public Accident create(Accident accident) {
-        AtomicInteger ai = new AtomicInteger(accidents.size());
+        AtomicInteger ai = new AtomicInteger(accidents.size() + 1);
         accident.setId(ai.get());
         accidents.put(accident.getId(), accident);
         return accident;
