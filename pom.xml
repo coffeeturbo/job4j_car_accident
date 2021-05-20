@@ -8,12 +8,16 @@
     <artifactId>job4j_car_accident</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
+
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
         <spring.version>5.2.7.RELEASE</spring.version>
         <loombok-plugin-version>1.18.20</loombok-plugin-version>
     </properties>
+
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -67,5 +71,18 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
