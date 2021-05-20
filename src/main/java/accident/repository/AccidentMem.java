@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class AccidentMem {
 
+
+
     private final HashMap<Integer, Accident> accidents = new HashMap<>(
             Map.of(
                     1, Accident.builder()
@@ -16,18 +18,21 @@ public class AccidentMem {
                             .name("Происшествие 1")
                             .address("Japan")
                             .text("Овария страшная")
+                            .type(AccidentTypeMem.getAccidentTypes().get(0))
                             .build(),
                     2, Accident.builder()
                             .id(2)
                             .name("Происшествие 2")
                             .address("USA")
                             .text("Овария не страшная")
+                            .type(AccidentTypeMem.getAccidentTypes().get(1))
                             .build(),
                     3, Accident.builder()
                             .id(3)
                             .name("Происшествие 3")
                             .address("Россия")
                             .text("Пьянство за рулем")
+                            .type(AccidentTypeMem.getAccidentTypes().get(2))
                             .build()
             )
     );

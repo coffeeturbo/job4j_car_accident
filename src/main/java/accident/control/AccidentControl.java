@@ -2,6 +2,7 @@ package accident.control;
 
 import accident.model.Accident;
 import accident.repository.AccidentMem;
+import accident.repository.AccidentTypeMem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,8 @@ public class AccidentControl {
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+        model.addAttribute("types", AccidentTypeMem.getAccidentTypes());
         return "accident/create";
     }
     @GetMapping("/update")
@@ -29,7 +31,8 @@ public class AccidentControl {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident) {
+    public String save(@ModelAttribute Accident accident, @RequestParam("type.id") Integer typeId) {
+        accident.setType(AccidentTypeMem.getAccidentTypes().get(typeId));
         accidents.save(accident);
         return "redirect:/";
     }

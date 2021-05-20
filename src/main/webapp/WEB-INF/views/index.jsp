@@ -21,6 +21,7 @@
         <thead>
         <tr>
             <td>ID</td>
+            <td>TYPE</td>
             <td>NAMES</td>
             <td>TEXT</td>
             <td>ADDRESS</td>
@@ -31,6 +32,7 @@
         <c:forEach var="accident" items="${accidents}">
             <tr>
                 <td>${accident.id}</td>
+                <td>${accident.type.name}</td>
                 <td>${accident.name}</td>
                 <td>${accident.text}</td>
                 <td>${accident.address}</td>
