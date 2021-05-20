@@ -9,8 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class AccidentMem {
 
-
-
     private final HashMap<Integer, Accident> accidents = new HashMap<>(
             Map.of(
                     1, Accident.builder()
@@ -19,6 +17,7 @@ public class AccidentMem {
                             .address("Japan")
                             .text("Овария страшная")
                             .type(AccidentTypeMem.getAccidentTypes().get(0))
+                            .rules(RuleMem.getRules())
                             .build(),
                     2, Accident.builder()
                             .id(2)

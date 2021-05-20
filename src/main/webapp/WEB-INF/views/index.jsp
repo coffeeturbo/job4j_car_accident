@@ -13,15 +13,14 @@
 <body>
 <div class="container ">
 
-    <ul>
-        <li><a href="<c:url value='/create'/>">Добавить инцидент</a></li>
-    </ul>
+
 
     <table class="table table-striped">
         <thead>
         <tr>
             <td>ID</td>
             <td>TYPE</td>
+            <td>RULES</td>
             <td>NAMES</td>
             <td>TEXT</td>
             <td>ADDRESS</td>
@@ -33,6 +32,13 @@
             <tr>
                 <td>${accident.id}</td>
                 <td>${accident.type.name}</td>
+                <td>
+                    <ul>
+                        <c:forEach var="rule" items="${accident.rules}">
+                            <li> ${rule.name}</li>
+                        </c:forEach>
+                    </ul>
+                </td>
                 <td>${accident.name}</td>
                 <td>${accident.text}</td>
                 <td>${accident.address}</td>
@@ -43,6 +49,9 @@
         </c:forEach>
         </tbody>
     </table>
+    <ul>
+        <li><a href="<c:url value='/create'/>">Добавить инцидент</a></li>
+    </ul>
 </div>
 </body>
 </html>
