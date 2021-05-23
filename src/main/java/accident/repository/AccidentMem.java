@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMem {
+    private final AtomicInteger ai;
 
     private final HashMap<Integer, Accident> accidents = new HashMap<>(
             Map.of(
@@ -36,6 +37,10 @@ public class AccidentMem {
             )
     );
 
+    public AccidentMem() {
+        this.ai = new AtomicInteger(accidents.size() + 1);
+    }
+
     public Collection<Accident> getAccidents() {
         return accidents.values();
     }
@@ -50,7 +55,6 @@ public class AccidentMem {
     }
 
     public Accident create(Accident accident) {
-        AtomicInteger ai = new AtomicInteger(accidents.size() + 1);
         accident.setId(ai.get());
         accidents.put(accident.getId(), accident);
         return accident;
