@@ -2,6 +2,7 @@ package accident.repository;
 
 import accident.model.Accident;
 import accident.model.AccidentType;
+import accident.model.Rule;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -19,7 +20,7 @@ public class AccidentMem {
                             .address("Japan")
                             .text("Овария страшная")
                             .type(getAccidentTypes().get(0))
-                            .rules(RuleMem.getRules())
+                            .rules(getRules())
                             .build(),
                     2, Accident.builder()
                             .id(2)
@@ -43,6 +44,16 @@ public class AccidentMem {
             AccidentType.builder().id(2).name("Машина и человек").build(),
             AccidentType.builder().id(3).name("Машина и велосипед").build()
     );
+
+    private List<Rule> rules = List.of(
+            Rule.builder().id(1).name("Статья. 1").build(),
+            Rule.builder().id(2).name("Статья. 2").build(),
+            Rule.builder().id(3).name("Статья. 3").build()
+    );
+
+    public List<Rule> getRules() {
+        return rules;
+    }
 
     public List<AccidentType> getAccidentTypes() {
         return types;
