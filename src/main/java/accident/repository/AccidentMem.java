@@ -12,6 +12,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AccidentMem {
     private final AtomicInteger ai;
 
+    private final List<AccidentType> types = List.of(
+            AccidentType.builder().id(1).name("Две машины").build(),
+            AccidentType.builder().id(2).name("Машина и человек").build(),
+            AccidentType.builder().id(3).name("Машина и велосипед").build()
+    );
+
+    private List<Rule> rules = List.of(
+            Rule.builder().id(1).name("Статья. 1").build(),
+            Rule.builder().id(2).name("Статья. 2").build(),
+            Rule.builder().id(3).name("Статья. 3").build()
+    );
+
     private final HashMap<Integer, Accident> accidents = new HashMap<>(
             Map.of(
                     1, Accident.builder()
@@ -39,17 +51,6 @@ public class AccidentMem {
             )
     );
 
-    private final List<AccidentType> types = List.of(
-            AccidentType.builder().id(1).name("Две машины").build(),
-            AccidentType.builder().id(2).name("Машина и человек").build(),
-            AccidentType.builder().id(3).name("Машина и велосипед").build()
-    );
-
-    private List<Rule> rules = List.of(
-            Rule.builder().id(1).name("Статья. 1").build(),
-            Rule.builder().id(2).name("Статья. 2").build(),
-            Rule.builder().id(3).name("Статья. 3").build()
-    );
 
     public List<Rule> getRules() {
         return rules;
