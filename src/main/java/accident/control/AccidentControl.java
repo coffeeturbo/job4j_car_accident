@@ -4,7 +4,6 @@ import accident.model.Accident;
 import accident.model.AccidentType;
 import accident.model.Rule;
 import accident.repository.AccidentMem;
-import accident.repository.AccidentTypeMem;
 import accident.repository.RuleMem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +26,7 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", AccidentTypeMem.getAccidentTypes());
+        model.addAttribute("types", accidents.getAccidentTypes());
         model.addAttribute("rules", RuleMem.getRules());
         return "accident/create";
     }
@@ -49,7 +48,7 @@ public class AccidentControl {
                 .map(integer -> RuleMem.getRules().get(integer))
                 .collect(Collectors.toList());
 
-        AccidentType type = AccidentTypeMem.getAccidentTypes().get(typeId);
+        AccidentType type = accidents.getAccidentTypes().get(typeId);
 
         accident.setType(type);
         accident.setRules(rules);

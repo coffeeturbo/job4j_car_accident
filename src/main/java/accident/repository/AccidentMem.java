@@ -1,6 +1,7 @@
 package accident.repository;
 
 import accident.model.Accident;
+import accident.model.AccidentType;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -17,7 +18,7 @@ public class AccidentMem {
                             .name("Происшествие 1")
                             .address("Japan")
                             .text("Овария страшная")
-                            .type(AccidentTypeMem.getAccidentTypes().get(0))
+                            .type(getAccidentTypes().get(0))
                             .rules(RuleMem.getRules())
                             .build(),
                     2, Accident.builder()
@@ -25,17 +26,27 @@ public class AccidentMem {
                             .name("Происшествие 2")
                             .address("USA")
                             .text("Овария не страшная")
-                            .type(AccidentTypeMem.getAccidentTypes().get(1))
+                            .type(getAccidentTypes().get(1))
                             .build(),
                     3, Accident.builder()
                             .id(3)
                             .name("Происшествие 3")
                             .address("Россия")
                             .text("Пьянство за рулем")
-                            .type(AccidentTypeMem.getAccidentTypes().get(2))
+                            .type(getAccidentTypes().get(2))
                             .build()
             )
     );
+
+    private final List<AccidentType> types = List.of(
+            AccidentType.builder().id(1).name("Две машины").build(),
+            AccidentType.builder().id(2).name("Машина и человек").build(),
+            AccidentType.builder().id(3).name("Машина и велосипед").build()
+    );
+
+    public List<AccidentType> getAccidentTypes() {
+        return types;
+    }
 
     public AccidentMem() {
         this.ai = new AtomicInteger(accidents.size() + 1);
@@ -46,7 +57,7 @@ public class AccidentMem {
     }
 
     public Accident save(Accident accident) {
-        return accident.getId()==null ? create(accident) : update(accident);
+        return accident.getId() == 0 ? create(accident) : update(accident);
     }
 
     public Accident update(Accident accident) {
