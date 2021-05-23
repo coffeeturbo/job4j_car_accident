@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 public class Rule {
-    private Integer id;
+    private int id;
     private String name;
 }

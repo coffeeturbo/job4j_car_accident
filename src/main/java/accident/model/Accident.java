@@ -13,12 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class Accident {
-    private Integer id;
+    private int id;
     private String name;
     private String text;
     private String address;
     private AccidentType type;
     private List<Rule> rules;
-
-
 }
