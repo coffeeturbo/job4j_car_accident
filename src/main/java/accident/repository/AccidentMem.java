@@ -9,14 +9,16 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
-public class AccidentMem {
+public class AccidentMem implements accident.repository.Repository {
     private final AtomicInteger ai;
 
-    private final List<AccidentType> types = List.of(
-            AccidentType.builder().id(1).name("Две машины").build(),
-            AccidentType.builder().id(2).name("Машина и человек").build(),
-            AccidentType.builder().id(3).name("Машина и велосипед").build()
-    );
+
+
+    private final HashMap<Integer, AccidentType> types = new HashMap<>(Map.of(
+            1, AccidentType.builder().id(1).name("Две машины").build(),
+            2, AccidentType.builder().id(2).name("Машина и человек").build(),
+            3, AccidentType.builder().id(3).name("Машина и велосипед").build()
+    ));
 
     private List<Rule> rules = List.of(
             Rule.builder().id(1).name("Статья. 1").build(),
@@ -52,12 +54,17 @@ public class AccidentMem {
     );
 
 
+    @Override
+    public List<Accident> getAll() {
+        return new ArrayList<>(accidents.values());
+    }
+
     public List<Rule> getRules() {
         return rules;
     }
 
     public List<AccidentType> getAccidentTypes() {
-        return types;
+        return  new ArrayList<>(types.values());
     }
 
     public AccidentMem() {
