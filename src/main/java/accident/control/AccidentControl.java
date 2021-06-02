@@ -32,6 +32,7 @@ public class AccidentControl {
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
 
+        model.addAttribute("types", accidents.getAccidentTypes());
         model.addAttribute("rules", accidents.getRules());
         model.addAttribute("accident", accidents.findById(id));
         return "accident/update";
