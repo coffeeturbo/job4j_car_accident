@@ -2,7 +2,6 @@ package accident.control;
 
 
 import accident.repository.AccidentJdbcTemplate;
-import accident.repository.AccidentMem;
 import accident.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexControl {
     private final Repository accidents;
 
-    public IndexControl(AccidentMem accidents) {
+    public IndexControl(AccidentJdbcTemplate accidents) {
         this.accidents = accidents;
     }
 

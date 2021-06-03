@@ -3,7 +3,8 @@ package accident.control;
 import accident.model.Accident;
 import accident.model.AccidentType;
 import accident.model.Rule;
-import accident.repository.AccidentMem;
+import accident.repository.AccidentJdbcTemplate;
+import accident.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class AccidentControl {
-    private final AccidentMem accidents;
+    private final Repository accidents;
 
-    public AccidentControl(AccidentMem accidents) {
+    public AccidentControl(AccidentJdbcTemplate accidents) {
         this.accidents = accidents;
     }
 
@@ -29,12 +30,12 @@ public class AccidentControl {
         model.addAttribute("rules", accidents.getRules());
         return "accident/create";
     }
+
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
-
         model.addAttribute("types", accidents.getAccidentTypes());
         model.addAttribute("rules", accidents.getRules());
-        model.addAttribute("accident", accidents.findById(id));
+        model.addAttribute("accident", accidents.findAccidentById(id));
         return "accident/update";
     }
 
@@ -45,10 +46,10 @@ public class AccidentControl {
             @RequestParam("rIds") Integer[] rIds
     ) {
         List<Rule> rules = Arrays.stream(rIds)
-                .map(integer -> accidents.getRules().get(integer))
+                .map(accidents::findRuleById)
                 .collect(Collectors.toList());
 
-        AccidentType type = accidents.getAccidentTypes().get(typeId);
+        AccidentType type = accidents.findTypeById(typeId);
 
         accident.setType(type);
         accident.setRules(rules);

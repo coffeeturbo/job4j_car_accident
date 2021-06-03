@@ -51,44 +51,53 @@ public class AccidentMem implements accident.repository.Repository {
             )
     );
 
+    public AccidentMem() {
+        this.ai = new AtomicInteger(accidents.size() + 1);
+    }
 
+    // Accident
     @Override
     public List<Accident> getAll() {
         return new ArrayList<>(accidents.values());
     }
 
-    public List<Rule> getRules() {
-        return new ArrayList<>(rules.values());
-    }
-
-    public List<AccidentType> getAccidentTypes() {
-        return  new ArrayList<>(types.values());
-    }
-
-    public AccidentMem() {
-        this.ai = new AtomicInteger(accidents.size() + 1);
-    }
-
-    public Collection<Accident> getAccidents() {
-        return accidents.values();
-    }
-
-    public Accident save(Accident accident) {
-        return accident.getId() == 0 ? create(accident) : update(accident);
-    }
-
-    public Accident update(Accident accident) {
-        accidents.put(accident.getId(), accident);
-        return accident;
-    }
-
+    @Override
     public Accident create(Accident accident) {
         accident.setId(ai.get());
         accidents.put(accident.getId(), accident);
         return accident;
     }
 
-    public Accident findById(Integer id) {
+    @Override
+    public Accident update(Accident accident) {
+        accidents.put(accident.getId(), accident);
+        return accident;
+    }
+
+    @Override
+    public Accident findAccidentById(int id) {
         return accidents.get(id);
+    }
+
+    // AccidentType
+    @Override
+    public List<AccidentType> getAccidentTypes() {
+        return  new ArrayList<>(types.values());
+    }
+
+    @Override
+    public AccidentType findTypeById(int id) {
+        return types.get(id);
+    }
+
+    // Rule
+    @Override
+    public Rule findRuleById(int id) {
+        return rules.get(id);
+    }
+
+    @Override
+    public List<Rule> getRules() {
+        return new ArrayList<>(rules.values());
     }
 }
