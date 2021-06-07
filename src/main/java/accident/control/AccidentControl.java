@@ -3,9 +3,7 @@ package accident.control;
 import accident.model.Accident;
 import accident.model.AccidentType;
 import accident.model.Rule;
-import accident.repository.AccidentHibernate;
-import accident.repository.AccidentJdbcTemplate;
-import accident.repository.Repository;
+import accident.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,24 +17,31 @@ import java.util.stream.Collectors;
 
 @Controller
 public class AccidentControl {
-    private final Repository accidents;
+    private final AccidentRepository accidents;
+    private final AccidentTypeRepository types;
+    private final RuleRepository rules;
 
-    public AccidentControl(AccidentHibernate accidents) {
+    public AccidentControl(AccidentRepository accidents,
+                           AccidentTypeRepository types,
+                           RuleRepository rules
+    ) {
         this.accidents = accidents;
+        this.types = types;
+        this.rules = rules;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", accidents.getAccidentTypes());
-        model.addAttribute("rules", accidents.getRules());
+        model.addAttribute("types", types.findAll());
+        model.addAttribute("rules", rules.findAll());
         return "accident/create";
     }
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("types", accidents.getAccidentTypes());
-        model.addAttribute("rules", accidents.getRules());
-        model.addAttribute("accident", accidents.findAccidentById(id));
+        model.addAttribute("types", types.findAll());
+        model.addAttribute("rules", rules.findAll());
+        model.addAttribute("accident", accidents.findById(id).get());
         return "accident/update";
     }
 
@@ -49,11 +54,14 @@ public class AccidentControl {
         List<Rule> rules = null;
         if (rIds != null) {
             rules = Arrays.stream(rIds)
-                    .map(accidents::findRuleById)
+                    .map(integer -> {
+                        var rule = this.rules.findById(integer);
+                        return rule.get();
+                    })
                     .collect(Collectors.toList());
         }
 
-        AccidentType type = accidents.findTypeById(typeId);
+        AccidentType type = (types.findById(typeId)).get();
 
         accident.setType(type);
         accident.setRules(rules);
