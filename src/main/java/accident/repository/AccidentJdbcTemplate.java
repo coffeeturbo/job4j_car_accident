@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Repository
+//@Repository
 public class AccidentJdbcTemplate implements accident.repository.Repository {
     private final JdbcTemplate jdbc;
 

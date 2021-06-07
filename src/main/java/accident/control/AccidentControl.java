@@ -3,6 +3,7 @@ package accident.control;
 import accident.model.Accident;
 import accident.model.AccidentType;
 import accident.model.Rule;
+import accident.repository.AccidentHibernate;
 import accident.repository.AccidentJdbcTemplate;
 import accident.repository.Repository;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 public class AccidentControl {
     private final Repository accidents;
 
-    public AccidentControl(AccidentJdbcTemplate accidents) {
+    public AccidentControl(AccidentHibernate accidents) {
         this.accidents = accidents;
     }
 
@@ -43,11 +44,14 @@ public class AccidentControl {
     public String save(
             @ModelAttribute Accident accident,
             @RequestParam("type.id") Integer typeId,
-            @RequestParam("rIds") Integer[] rIds
+            @RequestParam(value = "rIds", required = false) Integer[] rIds
     ) {
-        List<Rule> rules = Arrays.stream(rIds)
-                .map(accidents::findRuleById)
-                .collect(Collectors.toList());
+        List<Rule> rules = null;
+        if (rIds != null) {
+            rules = Arrays.stream(rIds)
+                    .map(accidents::findRuleById)
+                    .collect(Collectors.toList());
+        }
 
         AccidentType type = accidents.findTypeById(typeId);
 

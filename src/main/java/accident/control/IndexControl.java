@@ -1,6 +1,7 @@
 package accident.control;
 
 
+import accident.repository.AccidentHibernate;
 import accident.repository.AccidentJdbcTemplate;
 import accident.repository.Repository;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexControl {
     private final Repository accidents;
 
-    public IndexControl(AccidentJdbcTemplate accidents) {
+    public IndexControl(AccidentHibernate accidents) {
         this.accidents = accidents;
     }
 

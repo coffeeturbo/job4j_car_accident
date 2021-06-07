@@ -11,6 +11,8 @@
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.version>5.2.7.RELEASE</spring.version>
         <loombok-plugin-version>1.18.20</loombok-plugin-version>
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
@@ -99,6 +101,17 @@
             <artifactId>junit-platform-runner</artifactId>
             <version>${junit.platform.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
         </dependency>
     </dependencies>
 
