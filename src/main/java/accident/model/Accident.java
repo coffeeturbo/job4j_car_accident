@@ -27,7 +27,7 @@ public class Accident {
     private AccidentType type;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name ="accident_rules",
+            name = "accident_rules",
             joinColumns = {@JoinColumn(name = "accident_id")},
             inverseJoinColumns = {@JoinColumn(name = "rule_id")}
     )
