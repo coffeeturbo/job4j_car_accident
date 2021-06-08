@@ -53,7 +53,9 @@ public class AccidentHibernate implements accident.repository.Repository {
     public Accident findAccidentById(int id) {
         try (Session session = sf.openSession()) {
             return session
-                    .createQuery("from Accident c WHERE c.id=:id", Accident.class)
+                    .createQuery("SELECT DISTINCT a FROM Accident a"
+                            + " join fetch a.type"
+                            + " join fetch a.rules WHERE a.id=:id", Accident.class)
                     .setParameter("id", id)
                     .getSingleResult();
         }
