@@ -1,10 +1,7 @@
 package accident.control;
 
 
-import accident.repository.AccidentHibernate;
-import accident.repository.AccidentJdbcTemplate;
 import accident.repository.AccidentRepository;
-import accident.repository.Repository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
