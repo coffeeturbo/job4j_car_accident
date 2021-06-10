@@ -26,6 +26,9 @@
 <div class="container ">
 
 
+    <div>
+        login as: ${user.username}
+    </div>
 
     <table class="table table-striped">
         <thead>
